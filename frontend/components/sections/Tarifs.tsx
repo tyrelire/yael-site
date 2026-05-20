@@ -54,7 +54,7 @@ export default function Tarifs() {
             Des tarifs adaptés à votre activité
           </motion.h2>
           <motion.div variants={fadeUp} className="w-10 h-px bg-sage mx-auto mt-6 mb-8" />
-          <motion.p variants={fadeUp} className="text-mint/55 font-sans max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+          <motion.p variants={fadeUp} className="text-mint/80 font-sans max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
             Chaque infirmière libérale a une activité unique. C&apos;est pourquoi je propose des
             tarifs personnalisés, adaptés à votre volume d&apos;actes et à vos besoins réels.
           </motion.p>
@@ -87,7 +87,7 @@ export default function Tarifs() {
                 <p className={`font-display font-bold text-xl mb-1 ${plan.highlight ? "text-white" : "text-mint"}`}>
                   {plan.name}
                 </p>
-                <p className={`text-sm font-sans ${plan.highlight ? "text-white/75" : "text-mint/55"}`}>
+                <p className={`text-sm font-sans ${plan.highlight ? "text-white/75" : "text-mint/80"}`}>
                   {plan.desc}
                 </p>
               </div>
@@ -96,13 +96,13 @@ export default function Tarifs() {
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm font-sans">
                     <span className={`mt-0.5 shrink-0 font-bold ${plan.highlight ? "text-white" : "text-sage"}`}>✓</span>
-                    <span className={plan.highlight ? "text-white/90" : "text-mint/65"}>{f}</span>
+                    <span className={plan.highlight ? "text-white/90" : "text-mint/85"}>{f}</span>
                   </li>
                 ))}
               </ul>
 
               <div>
-                <p className={`text-xs font-sans mb-3 ${plan.highlight ? "text-white/55" : "text-mint/35"}`}>
+                <p className={`text-xs font-sans mb-3 ${plan.highlight ? "text-white/55" : "text-mint/60"}`}>
                   Tarif sur devis personnalisé
                 </p>
                 <a
@@ -125,7 +125,7 @@ export default function Tarifs() {
           initial="hidden"
           whileInView="visible"
           viewport={vp}
-          className="text-center text-mint/35 text-xs font-sans mt-10"
+          className="text-center text-mint/60 text-xs font-sans mt-10"
         >
           Premier échange offert · Sans engagement · Tarifs adaptés à votre volume d&apos;activité
         </motion.p>

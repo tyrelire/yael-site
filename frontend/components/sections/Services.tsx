@@ -55,7 +55,7 @@ export default function Services() {
               <div className="w-8 h-[2px] bg-sage/30 group-hover:bg-sage mb-4 transition-colors duration-300" />
 
               {/* Description */}
-              <p className="text-forest/60 font-sans text-[15px] leading-[1.75] flex-1">
+              <p className="text-forest/80 font-sans text-[15px] leading-[1.75] flex-1">
                 {service.desc}
               </p>
             </motion.div>

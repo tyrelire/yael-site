@@ -34,8 +34,8 @@ export const services = [
 ];
 
 export const navLinks = [
-  { label: "À propos", href: "#apropos" },
-  { label: "Prestations", href: "#prestations" },
-  { label: "Tarifs", href: "#tarifs" },
-  { label: "Contact", href: "#contact" },
+  { label: "À propos", href: "/a-propos" },
+  { label: "Prestations", href: "/prestations" },
+  { label: "Tarifs", href: "/tarifs" },
+  { label: "Contact", href: "/contact" },
 ];

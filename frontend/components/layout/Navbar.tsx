@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { navLinks } from "@/lib/data";
 
 export default function Navbar() {
@@ -31,10 +30,10 @@ export default function Navbar() {
         <div className="max-w-6xl mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-4">
 
           {/* Logo */}
-          <a href="/" className="flex items-center shrink-0 z-10">
-            <div className="relative w-32 h-10">
-              <Image src="/assets/logo.png" alt="Yes Invoice" fill sizes="128px" className="object-contain object-left" />
-            </div>
+          <a href="/" aria-label="Yes Invoice — accueil" className="flex items-center shrink-0 z-10 select-none">
+            <span className="font-script text-sage text-[2rem] leading-none">Y</span>
+            <span className="font-display text-forest text-[1.25rem] font-bold leading-none -ml-[1px]">es</span>
+            <span className="ml-2 font-sans text-[9px] text-forest/45 uppercase tracking-[0.2em] font-semibold self-end mb-[3px]">Invoice</span>
           </a>
 
           {/* Liens desktop */}
@@ -54,7 +53,7 @@ export default function Navbar() {
           {/* Droite : CTA + burger */}
           <div className="flex items-center gap-3">
             <a
-              href="#contact"
+              href="/contact"
               className="hidden sm:inline-flex shrink-0 text-xs font-sans text-forest border border-sage/40 px-4 py-2 rounded-full hover:bg-sage hover:text-white hover:border-sage transition-all duration-200"
             >
               Me contacter →
@@ -92,9 +91,11 @@ export default function Navbar() {
       >
         {/* En-tête du drawer */}
         <div className="h-[68px] flex items-center justify-between px-6 border-b border-sage/10">
-          <div className="relative w-28 h-9">
-            <Image src="/assets/logo.png" alt="Yes Invoice" fill sizes="112px" className="object-contain object-left" />
-          </div>
+          <a href="/" aria-label="Yes Invoice — accueil" className="flex items-center select-none">
+            <span className="font-script text-sage text-[1.75rem] leading-none">Y</span>
+            <span className="font-display text-forest text-[1.1rem] font-bold leading-none -ml-[1px]">es</span>
+            <span className="ml-1.5 font-sans text-[8px] text-forest/45 uppercase tracking-[0.18em] font-semibold self-end mb-[2px]">Invoice</span>
+          </a>
           <button
             onClick={() => setOpen(false)}
             aria-label="Fermer le menu"
@@ -125,7 +126,7 @@ export default function Navbar() {
         {/* CTA bas du drawer */}
         <div className="px-6 pb-10 pt-6">
           <a
-            href="#contact"
+            href="/contact"
             onClick={() => setOpen(false)}
             className="block w-full text-center bg-forest text-mint font-sans font-semibold py-3.5 text-sm rounded-xl hover:bg-sage transition-all duration-200"
           >

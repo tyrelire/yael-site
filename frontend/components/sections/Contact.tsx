@@ -16,7 +16,7 @@ export default function Contact() {
             Parlons de votre activité
           </motion.h2>
           <motion.div variants={fadeUp} className="w-10 h-px bg-sage mx-auto mb-8" />
-          <motion.p variants={fadeUp} className="text-forest/60 font-sans max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
+          <motion.p variants={fadeUp} className="text-forest/80 font-sans max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
             Un échange de quelques minutes suffit pour savoir si je peux vous simplifier
             la vie. La première consultation est offerte, sans aucun engagement.
           </motion.p>
@@ -86,7 +86,7 @@ export default function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={vp}
-          className="text-center text-forest/35 text-xs font-sans mt-10 font-script text-base"
+          className="text-center text-forest/60 text-xs font-sans mt-10 font-script text-base"
         >
           &ldquo;Un premier échange suffit souvent pour savoir si on est faits pour travailler ensemble.&rdquo;
         </motion.p>

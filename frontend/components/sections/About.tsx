@@ -55,19 +55,19 @@ export default function About() {
               Bonjour, je suis Yaël
             </h2>
             <div className="w-10 h-px bg-sage mb-8" />
-            <p className="text-forest/65 font-sans leading-relaxed mb-5 text-sm sm:text-base">
+            <p className="text-forest/82 font-sans leading-relaxed mb-5 text-sm sm:text-base">
               Je me suis lancée en tant que{" "}
               <strong className="text-forest">facturière indépendante</strong> pour les
               infirmières et infirmiers libéraux, avec une conviction simple : vous méritez
               de vous concentrer sur vos patients, pas sur la paperasse administrative.
             </p>
-            <p className="text-forest/65 font-sans leading-relaxed mb-5 text-sm sm:text-base">
+            <p className="text-forest/82 font-sans leading-relaxed mb-5 text-sm sm:text-base">
               En choisissant une indépendante plutôt qu&apos;une grande société, vous bénéficiez
               d&apos;un suivi{" "}
               <strong className="text-forest">vraiment personnalisé</strong> — une seule personne
               qui connaît votre activité, vos spécificités, vos habitudes.
             </p>
-            <p className="text-forest/65 font-sans leading-relaxed text-sm sm:text-base">
+            <p className="text-forest/82 font-sans leading-relaxed text-sm sm:text-base">
               Je crois profondément en une relation de confiance, transparente et humaine.
               Parce qu&apos;une bonne collaboration, ça se construit ensemble, dans la durée.
             </p>
@@ -82,7 +82,7 @@ export default function About() {
               ].map((item) => (
                 <div key={item.label} className="bg-mint-dark rounded-xl p-4">
                   <p className="font-display text-forest font-bold text-sm">{item.label}</p>
-                  <p className="text-forest/55 text-xs font-sans mt-1">{item.value}</p>
+                  <p className="text-forest/72 text-xs font-sans mt-1">{item.value}</p>
                 </div>
               ))}
             </div>

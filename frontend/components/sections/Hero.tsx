@@ -6,12 +6,12 @@ import { fadeUp, stagger } from "@/lib/animations";
 export default function Hero() {
   return (
     <section className="relative min-h-[100svh] flex flex-col bg-mint overflow-hidden">
-      {/* Cercles déco */}
-      <div className="absolute -top-40 -right-40 w-[480px] h-[480px] rounded-full bg-sage/6 pointer-events-none" />
-      <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-sage-light/70 pointer-events-none" />
+      {/* Cercles déco — en fond */}
+      <div className="absolute z-0 -top-40 -right-40 w-[480px] h-[480px] rounded-full bg-sage/6 pointer-events-none" />
+      <div className="absolute z-0 -bottom-32 -left-32 w-96 h-96 rounded-full bg-sage-light/70 pointer-events-none" />
 
       {/* Contenu principal */}
-      <div className="flex-1 flex items-center pt-[68px]">
+      <div className="relative z-[1] flex-1 flex items-center pt-[68px]">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 py-16">
 
           {/* Colonne gauche — texte (3/5) */}
@@ -25,8 +25,8 @@ export default function Hero() {
               variants={fadeUp}
               className="inline-flex items-center gap-3 text-sage font-sans text-xs uppercase tracking-[0.28em] font-semibold mb-6"
             >
-              <span className="w-8 h-px bg-sage" />
-              Facturière indépendante · Micro-entreprise
+              <span className="w-8 h-px bg-sage"></span>
+              <span>Facturière indépendante · Micro-entreprise</span>
             </motion.span>
 
             <motion.h1 variants={fadeUp} className="font-display text-forest font-bold leading-tight">
@@ -38,7 +38,7 @@ export default function Hero() {
 
             <motion.p
               variants={fadeUp}
-              className="text-forest/65 font-sans text-base leading-relaxed mt-6 max-w-lg"
+              className="text-forest/82 font-sans text-base leading-relaxed mt-6 max-w-lg"
             >
               Je gère l&apos;intégralité de votre facturation d&apos;actes infirmiers : télétransmission
               SESAM-Vitale, relations avec la Sécurité sociale et les mutuelles, suivi des
@@ -51,7 +51,7 @@ export default function Hero() {
             <motion.div variants={stagger} className="flex flex-col sm:flex-row gap-3 mt-8">
               <motion.a
                 variants={fadeUp}
-                href="#contact"
+                href="/contact"
                 className="bg-forest text-mint font-sans font-semibold px-7 py-3.5 text-sm text-center hover:bg-sage transition-all duration-200 w-full sm:w-auto rounded-lg"
               >
                 Me contacter →
@@ -59,7 +59,7 @@ export default function Hero() {
               <motion.a
                 variants={fadeUp}
                 href="#prestations"
-                className="border-2 border-forest/15 text-forest font-sans font-medium px-7 py-3.5 text-sm text-center hover:border-sage hover:text-sage transition-all duration-200 w-full sm:w-auto rounded-lg"
+                className="border-2 border-forest/35 text-forest font-sans font-medium px-7 py-3.5 text-sm text-center hover:border-sage hover:text-sage transition-all duration-200 w-full sm:w-auto rounded-lg"
               >
                 Mes prestations
               </motion.a>
@@ -71,7 +71,7 @@ export default function Hero() {
                 <motion.span
                   key={point}
                   variants={fadeUp}
-                  className="flex items-center gap-2 bg-white border border-sage/20 px-4 py-2 text-xs font-sans text-forest/70 rounded-full shadow-sm"
+                  className="flex items-center gap-2 bg-white border border-sage/30 px-4 py-2 text-xs font-sans text-forest/85 rounded-full shadow-sm"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
                   {point}
