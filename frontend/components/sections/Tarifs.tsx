@@ -41,9 +41,9 @@ const plans = [
   },
 ];
 
-export default function Tarifs() {
+export default function Tarifs({ className }: Readonly<{ className?: string }>) {
   return (
-    <section id="tarifs" className="bg-forest py-12 sm:py-20 lg:py-28">
+    <section id="tarifs" className={className ?? "bg-forest py-12 sm:py-20 lg:py-28"}>
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={vp} className="text-center mb-12 sm:mb-16">

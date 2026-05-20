@@ -4,9 +4,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeLeft, fadeRight, vp } from "@/lib/animations";
 
-export default function About() {
+export default function About({ className }: Readonly<{ className?: string }>) {
   return (
-    <section id="apropos" className="bg-white py-12 sm:py-20 lg:py-28">
+    <section id="apropos" className={className ?? "bg-white py-12 sm:py-20 lg:py-28"}>
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 

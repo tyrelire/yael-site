@@ -15,7 +15,7 @@ export default function AProposPage() {
     <>
       <Navbar />
       <main className="pt-[68px]">
-        <About />
+        <About className="bg-white pt-8 sm:pt-12 pb-12 sm:pb-20 lg:pb-28" />
         <ForWho />
       </main>
       <Footer />

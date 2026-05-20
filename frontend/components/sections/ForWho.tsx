@@ -26,9 +26,9 @@ const steps = [
   },
 ];
 
-export default function ForWho() {
+export default function ForWho({ className }: Readonly<{ className?: string }>) {
   return (
-    <section className="bg-sage-light py-12 sm:py-20 lg:py-28">
+    <section className={className ?? "bg-sage-light py-12 sm:py-20 lg:py-28"}>
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
         <motion.div

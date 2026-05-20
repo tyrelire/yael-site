@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { fadeUp, stagger, vp } from "@/lib/animations";
 
-export default function Contact() {
+export default function Contact({ className }: Readonly<{ className?: string }>) {
   return (
-    <section id="contact" className="bg-white py-12 sm:py-20 lg:py-28">
+    <section id="contact" className={className ?? "bg-white py-12 sm:py-20 lg:py-28"}>
       <div className="max-w-4xl mx-auto px-5 sm:px-8">
 
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={vp} className="text-center mb-12 sm:mb-16">

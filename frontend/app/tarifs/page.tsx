@@ -14,7 +14,7 @@ export default function TarifsPage() {
     <>
       <Navbar />
       <main className="pt-[68px]">
-        <Tarifs />
+        <Tarifs className="bg-forest pt-8 sm:pt-12 pb-12 sm:pb-20 lg:pb-28" />
       </main>
       <Footer />
     </>

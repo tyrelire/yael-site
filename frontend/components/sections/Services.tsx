@@ -4,19 +4,24 @@ import { motion } from "framer-motion";
 import { fadeUp, stagger, vp } from "@/lib/animations";
 import { services } from "@/lib/data";
 
-export default function Services() {
+export default function Services({ className }: Readonly<{ className?: string }>) {
   return (
-    <section id="prestations" className="bg-white py-12 sm:py-20 lg:py-28">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+    <section id="prestations" className={className ?? "bg-white py-12 sm:py-20 lg:py-28"}>
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
 
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={vp} className="text-center mb-10 sm:mb-14">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={vp} className="mb-12 sm:mb-20">
           <motion.p variants={fadeUp} className="text-sage uppercase tracking-widest text-xs font-sans font-semibold mb-4">
             Ce que je fais pour vous
           </motion.p>
-          <motion.h2 variants={fadeUp} className="font-display text-forest text-3xl sm:text-4xl font-bold">
-            Mes prestations
-          </motion.h2>
-          <motion.div variants={fadeUp} className="w-10 h-px bg-sage mx-auto mt-6" />
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <motion.h2 variants={fadeUp} className="font-display text-forest text-3xl sm:text-4xl font-bold">
+              Mes prestations
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-forest/60 font-sans text-sm max-w-xs leading-relaxed">
+              Six missions que je prends entièrement en charge pour que vous n&apos;ayez plus à y penser.
+            </motion.p>
+          </div>
+          <motion.div variants={fadeUp} className="w-full h-px bg-forest/8 mt-8" />
         </motion.div>
 
         <motion.div
@@ -24,42 +29,65 @@ export default function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={vp}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="divide-y divide-forest/8"
         >
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               variants={fadeUp}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="bg-mint border border-sage/10 p-6 sm:p-7 hover:border-sage/35 hover:shadow-lg transition-all duration-300 flex flex-col group cursor-default relative overflow-hidden rounded-xl"
+              className="group relative grid grid-cols-[3rem_1fr] sm:grid-cols-[5rem_1fr_minmax(0,1.8fr)] gap-x-6 sm:gap-x-10 gap-y-3 py-8 sm:py-10 cursor-default"
             >
-              {/* Ligne sage animée en bas */}
-              <div className="absolute bottom-0 left-0 h-[3px] bg-sage w-0 group-hover:w-full transition-all duration-500 ease-out rounded-b-xl" />
+              {/* Accent line gauche au hover */}
+              <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-sage origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-400 ease-out" />
 
-              {/* Icône + numéro */}
-              <div className="flex items-start justify-between mb-5">
-                <div className="w-11 h-11 bg-sage-light rounded-lg flex items-center justify-center shrink-0 text-sage group-hover:bg-sage group-hover:text-white transition-all duration-300">
+              {/* Numéro */}
+              <span className="font-display text-sage/25 font-bold text-3xl sm:text-4xl leading-none group-hover:text-sage/55 transition-colors duration-300 pt-1 select-none">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              {/* Titre + icône */}
+              <div className="flex items-start gap-3 sm:pt-1">
+                <div className="w-9 h-9 rounded-full bg-sage-light flex items-center justify-center shrink-0 text-sage group-hover:bg-sage group-hover:text-white transition-all duration-300 mt-0.5">
                   {service.icon}
                 </div>
-                <span className="font-display text-sage/40 font-bold text-xs tracking-[0.2em] group-hover:text-sage transition-colors duration-300">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+                <div>
+                  <h3 className="font-display text-forest font-bold text-lg sm:text-xl leading-snug group-hover:text-sage transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  <div className="w-5 h-[2px] bg-sage/30 mt-2.5 group-hover:w-10 group-hover:bg-sage transition-all duration-500" />
+                  {/* Description visible sur mobile sous le titre */}
+                  <p className="sm:hidden text-forest/80 font-sans text-sm leading-relaxed mt-3">
+                    {service.desc}
+                  </p>
+                </div>
               </div>
 
-              {/* Titre */}
-              <h3 className="font-display text-forest font-bold text-lg leading-snug mb-3">
-                {service.title}
-              </h3>
-
-              {/* Trait sage */}
-              <div className="w-8 h-[2px] bg-sage/30 group-hover:bg-sage mb-4 transition-colors duration-300" />
-
-              {/* Description */}
-              <p className="text-forest/80 font-sans text-[15px] leading-[1.75] flex-1">
+              {/* Description — colonne de droite sur desktop */}
+              <p className="hidden sm:block text-forest/80 font-sans text-[15px] leading-relaxed sm:pt-1 col-start-3">
                 {service.desc}
               </p>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* CTA bas de page */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={vp}
+          className="mt-14 pt-10 border-t border-forest/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+        >
+          <div>
+            <p className="font-display text-forest font-bold text-lg">Vous avez des questions ?</p>
+            <p className="text-forest/60 font-sans text-sm mt-1">Premier échange offert, sans engagement.</p>
+          </div>
+          <a
+            href="/contact"
+            className="inline-flex shrink-0 items-center gap-2 bg-forest text-mint font-sans font-semibold px-7 py-3.5 text-sm rounded-xl hover:bg-sage transition-all duration-200"
+          >
+            Me contacter →
+          </a>
         </motion.div>
 
       </div>
