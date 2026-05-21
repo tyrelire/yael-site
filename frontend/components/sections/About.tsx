@@ -80,7 +80,7 @@ export default function About({ className }: Readonly<{ className?: string }>) {
                 { label: "Transparente", value: "Rapports clairs chaque mois" },
                 { label: "De confiance", value: "Données confidentielles" },
               ].map((item) => (
-                <div key={item.label} className="bg-mint-dark rounded-xl p-4">
+                <div key={item.label} className="bg-sage-light rounded-xl p-4">
                   <p className="font-display text-forest font-bold text-sm">{item.label}</p>
                   <p className="text-forest/72 text-xs font-sans mt-1">{item.value}</p>
                 </div>

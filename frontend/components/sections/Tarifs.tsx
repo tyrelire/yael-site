@@ -106,7 +106,7 @@ export default function Tarifs({ className }: Readonly<{ className?: string }>) 
                   Tarif sur devis personnalisé
                 </p>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className={`block w-full text-center font-sans font-semibold py-3 text-sm rounded-xl transition-all duration-200 ${
                     plan.highlight
                       ? "bg-white text-sage hover:bg-mint"

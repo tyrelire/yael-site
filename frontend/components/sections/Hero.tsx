@@ -58,7 +58,7 @@ export default function Hero() {
               </motion.a>
               <motion.a
                 variants={fadeUp}
-                href="#prestations"
+                href="/prestations"
                 className="border-2 border-forest/35 text-forest font-sans font-medium px-7 py-3.5 text-sm text-center hover:border-sage hover:text-sage transition-all duration-200 w-full sm:w-auto rounded-lg"
               >
                 Mes prestations

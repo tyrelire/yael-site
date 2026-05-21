@@ -82,7 +82,7 @@ export default function ForWho({ className }: Readonly<{ className?: string }>) 
           className="text-center mt-14"
         >
           <a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 bg-forest text-mint font-sans font-semibold px-8 py-4 text-sm rounded-xl hover:bg-sage transition-all duration-200"
           >
             Commencer par un échange gratuit →
