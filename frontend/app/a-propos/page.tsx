@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import About from "@/components/sections/About";
 import ForWho from "@/components/sections/ForWho";
 
@@ -13,19 +11,8 @@ export const metadata: Metadata = {
 export default function AProposPage() {
   return (
     <>
-      <Navbar />
-      <main className="pt-[68px]">
-        <div className="bg-forest py-10 sm:py-14">
-          <div className="max-w-6xl mx-auto px-5 sm:px-8">
-            <p className="text-sage uppercase tracking-widest text-xs font-sans font-semibold mb-3">À propos</p>
-            <h1 className="font-display text-mint text-3xl sm:text-4xl font-bold">Qui suis-je ?</h1>
-            <div className="w-10 h-px bg-sage mt-6" />
-          </div>
-        </div>
-        <About className="bg-white pb-12 sm:pb-20 lg:pb-28" />
-        <ForWho />
-      </main>
-      <Footer />
+      <About className="bg-white min-h-screen flex flex-col justify-center py-6 sm:py-10" />
+      <ForWho className="bg-sage-light pt-8 sm:pt-12 pb-12 sm:pb-16" />
     </>
   );
 }

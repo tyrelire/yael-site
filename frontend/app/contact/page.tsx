@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Contact from "@/components/sections/Contact";
 
 export const metadata: Metadata = {
@@ -10,13 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return (
-    <>
-      <Navbar />
-      <main className="pt-[68px]">
-        <Contact className="bg-white pt-8 sm:pt-12 pb-12 sm:pb-20 lg:pb-28" />
-      </main>
-      <Footer />
-    </>
-  );
+  return <Contact className="bg-sage-light flex-1 min-h-screen flex flex-col justify-center py-6 sm:py-10" />;
 }

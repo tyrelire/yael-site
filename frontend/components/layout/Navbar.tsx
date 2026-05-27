@@ -23,8 +23,8 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-white/85 backdrop-blur-xl border-b border-sage/15 shadow-[0_4px_24px_rgba(26,43,26,0.06)]"
-            : "bg-white/60 backdrop-blur-md border-b border-transparent"
+            ? "bg-white/92 backdrop-blur-xl border-b border-sage/20 shadow-[0_4px_24px_rgba(26,43,26,0.08)]"
+            : "bg-white/82 backdrop-blur-lg border-b border-sage/10"
         }`}
       >
         <div className="max-w-6xl mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between gap-4">
@@ -33,7 +33,7 @@ export default function Navbar() {
           <a href="/" aria-label="Yes Invoice — accueil" className="flex items-center shrink-0 z-10 select-none">
             <span className="font-script text-sage text-[2rem] leading-none">Y</span>
             <span className="font-display text-forest text-[1.25rem] font-bold leading-none -ml-[1px]">es</span>
-            <span className="ml-2 font-sans text-[9px] text-forest/45 uppercase tracking-[0.2em] font-semibold self-end mb-[3px]">Invoice</span>
+            <span className="ml-2 font-sans text-[10px] text-forest/60 uppercase tracking-[0.2em] font-semibold self-end mb-[3px]">Invoice</span>
           </a>
 
           {/* Liens desktop */}
@@ -42,7 +42,7 @@ export default function Navbar() {
               <a
                 key={label}
                 href={href}
-                className="relative text-sm font-sans text-forest/60 hover:text-forest transition-colors duration-200 group"
+                className="relative text-[0.9375rem] font-sans font-medium text-forest/80 hover:text-forest transition-colors duration-200 group"
               >
                 {label}
                 <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-sage origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
@@ -54,7 +54,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href="/contact"
-              className="hidden sm:inline-flex shrink-0 text-xs font-sans text-forest border border-sage/40 px-4 py-2 rounded-full hover:bg-sage hover:text-white hover:border-sage transition-all duration-200"
+              className="hidden sm:inline-flex shrink-0 text-sm font-sans font-semibold bg-forest text-mint px-5 py-2 rounded-xl hover:bg-sage-dark transition-all duration-200"
             >
               Me contacter →
             </a>
@@ -63,7 +63,7 @@ export default function Navbar() {
             <button
               onClick={() => setOpen(!open)}
               aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-              className="md:hidden relative w-9 h-9 flex flex-col justify-center items-center gap-[5px] shrink-0"
+              className="md:hidden relative w-11 h-11 flex flex-col justify-center items-center gap-[5px] shrink-0"
             >
               <span className={`block h-[1.5px] bg-forest transition-all duration-300 origin-center ${open ? "w-5 rotate-45 translate-y-[6.5px]" : "w-5"}`} />
               <span className={`block h-[1.5px] bg-forest transition-all duration-300 ${open ? "w-0 opacity-0" : "w-5 opacity-100"}`} />

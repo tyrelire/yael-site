@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Dancing_Script, Inter } from "next/font/google";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import CookieBanner from "@/components/ui/CookieBanner";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -66,7 +69,14 @@ export default function RootLayout({
       lang="fr"
       className={`${playfair.variable} ${dancing.variable} ${inter.variable}`}
     >
-      <body suppressHydrationWarning className="min-h-full flex flex-col antialiased">{children}</body>
+      <body suppressHydrationWarning className="min-h-screen flex flex-col antialiased">
+        <Navbar />
+        <main className="pt-[68px] flex-1 flex flex-col">
+          {children}
+        </main>
+        <Footer />
+        <CookieBanner />
+      </body>
     </html>
   );
 }

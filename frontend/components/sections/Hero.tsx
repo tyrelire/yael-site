@@ -5,14 +5,16 @@ import { fadeUp, stagger } from "@/lib/animations";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100svh] flex flex-col bg-mint overflow-hidden">
-      {/* Cercles déco — en fond */}
-      <div className="absolute z-0 -top-40 -right-40 w-[480px] h-[480px] rounded-full bg-sage/6 pointer-events-none" />
-      <div className="absolute z-0 -bottom-32 -left-32 w-96 h-96 rounded-full bg-sage-light/70 pointer-events-none" />
+    <section className="relative min-h-screen flex flex-col bg-mint overflow-hidden">
+      {/* Formes déco — fond riche */}
+      <div className="absolute z-0 -top-32 -right-32 w-[640px] h-[640px] rounded-full bg-sage/15 blur-3xl pointer-events-none" />
+      <div className="absolute z-0 -bottom-24 -left-24 w-[480px] h-[480px] rounded-full bg-sage-light blur-3xl pointer-events-none" />
+      <div className="absolute z-0 top-1/3 left-1/4 w-80 h-80 rounded-full bg-sage/8 blur-2xl pointer-events-none" />
+      <div className="absolute z-0 bottom-1/4 right-1/4 w-56 h-56 rounded-full bg-sage-dark/6 blur-2xl pointer-events-none" />
 
       {/* Contenu principal */}
-      <div className="relative z-[1] flex-1 flex items-center pt-[68px]">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 py-16">
+      <div className="relative z-[1] flex-1 flex items-center">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 py-6 sm:py-12">
 
           {/* Colonne gauche — texte (3/5) */}
           <motion.div
@@ -89,7 +91,7 @@ export default function Hero() {
           >
             <div
               className="rounded-2xl p-8 text-mint relative overflow-hidden"
-              style={{ backgroundColor: "#1A2B1A" }}
+              style={{ backgroundColor: "#2D2219" }}
             >
               {/* Pattern dots */}
               <div

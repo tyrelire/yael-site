@@ -43,21 +43,26 @@ const plans = [
 
 export default function Tarifs({ className }: Readonly<{ className?: string }>) {
   return (
-    <section id="tarifs" className={className ?? "bg-forest py-12 sm:py-20 lg:py-28"}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+    <section id="tarifs" className={`relative overflow-hidden ${className ?? "bg-forest py-12 sm:py-20 lg:py-28"}`}>
+      {/* Blobs forts pour que le glass soit visible */}
+      <div className="absolute z-0 -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-sage/25 blur-3xl pointer-events-none" />
+      <div className="absolute z-0 -bottom-32 -left-32 w-[480px] h-[480px] rounded-full bg-sage-dark/20 blur-3xl pointer-events-none" />
+      <div className="absolute z-0 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-sage/12 blur-2xl pointer-events-none" />
+      {/* Pattern points subtil */}
+      <div
+        className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }}
+      />
 
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={vp} className="text-center mb-12 sm:mb-16">
-          <motion.p variants={fadeUp} className="text-sage uppercase tracking-widest text-xs font-sans font-semibold mb-4">
-            Tarifs
-          </motion.p>
-          <motion.h2 variants={fadeUp} className="font-display text-mint text-3xl sm:text-4xl font-bold">
-            Des tarifs adaptés à votre activité
-          </motion.h2>
-          <motion.div variants={fadeUp} className="w-10 h-px bg-sage mx-auto mt-6 mb-8" />
-          <motion.p variants={fadeUp} className="text-mint/80 font-sans max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Chaque infirmière libérale a une activité unique. C&apos;est pourquoi je propose des
-            tarifs personnalisés, adaptés à votre volume d&apos;actes et à vos besoins réels.
-          </motion.p>
+      <div className="relative z-[1] max-w-5xl mx-auto px-5 sm:px-8">
+
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={vp} className="flex items-baseline justify-between mb-7 sm:mb-8">
+          <motion.span variants={fadeUp} className="text-sage font-sans text-xs uppercase tracking-[0.28em] font-semibold">
+            Formules
+          </motion.span>
+          <motion.span variants={fadeUp} className="text-white/40 font-sans text-xs">
+            Tarif sur devis · Premier échange offert
+          </motion.span>
         </motion.div>
 
         <motion.div
@@ -65,70 +70,55 @@ export default function Tarifs({ className }: Readonly<{ className?: string }>) 
           initial="hidden"
           whileInView="visible"
           viewport={vp}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
         >
           {plans.map((plan) => (
             <motion.div
               key={plan.name}
               variants={fadeUp}
-              className={`rounded-2xl p-7 flex flex-col transition-all duration-300 ${
+              className={`rounded-2xl p-5 sm:p-6 flex flex-col transition-all duration-300 ${
                 plan.highlight
-                  ? "bg-sage ring-2 ring-sage/60 shadow-xl"
-                  : "bg-mint/6 border border-mint/10 hover:bg-mint/10"
+                  ? "backdrop-blur-md bg-sage/75 border border-sage/50 shadow-2xl ring-1 ring-sage/30 sm:scale-[1.02]"
+                  : "backdrop-blur-sm bg-white/8 border border-white/10 hover:bg-white/12 hover:border-white/18"
               }`}
             >
               {plan.highlight && (
-                <span className="inline-block bg-white/20 text-white text-[10px] font-sans uppercase tracking-widest px-3 py-1 rounded-full mb-4 self-start">
+                <span className="inline-block bg-white/20 text-white text-[10px] font-sans uppercase tracking-widest px-3 py-1 rounded-full mb-3 self-start backdrop-blur-sm">
                   Populaire
                 </span>
               )}
 
-              <div className="mb-6">
-                <p className={`font-display font-bold text-xl mb-1 ${plan.highlight ? "text-white" : "text-mint"}`}>
+              <div className="mb-4">
+                <p className="font-display font-bold text-xl mb-0.5 text-white">
                   {plan.name}
                 </p>
-                <p className={`text-sm font-sans ${plan.highlight ? "text-white/75" : "text-mint/80"}`}>
+                <p className="text-xs font-sans text-white/60">
                   {plan.desc}
                 </p>
               </div>
 
-              <ul className="space-y-3 flex-1 mb-8">
+              <ul className="space-y-2 flex-1 mb-5">
                 {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm font-sans">
-                    <span className={`mt-0.5 shrink-0 font-bold ${plan.highlight ? "text-white" : "text-sage"}`}>✓</span>
-                    <span className={plan.highlight ? "text-white/90" : "text-mint/85"}>{f}</span>
+                  <li key={f} className="flex items-start gap-2.5 text-sm font-sans">
+                    <span className={`mt-0.5 shrink-0 font-semibold ${plan.highlight ? "text-white" : "text-sage"}`}>✓</span>
+                    <span className="text-white/90">{f}</span>
                   </li>
                 ))}
               </ul>
 
-              <div>
-                <p className={`text-xs font-sans mb-3 ${plan.highlight ? "text-white/55" : "text-mint/60"}`}>
-                  Tarif sur devis personnalisé
-                </p>
-                <a
-                  href="/contact"
-                  className={`block w-full text-center font-sans font-semibold py-3 text-sm rounded-xl transition-all duration-200 ${
-                    plan.highlight
-                      ? "bg-white text-sage hover:bg-mint"
-                      : "border border-mint/20 text-mint hover:bg-mint/10"
-                  }`}
-                >
-                  {plan.cta}
-                </a>
-              </div>
+              <a
+                href="/contact"
+                className={`block w-full text-center font-sans font-semibold py-3 text-sm rounded-xl transition-all duration-200 ${
+                  plan.highlight
+                    ? "bg-white text-forest hover:bg-mint"
+                    : "bg-white/10 backdrop-blur-sm border border-white/15 text-white hover:bg-white/20"
+                }`}
+              >
+                {plan.cta}
+              </a>
             </motion.div>
           ))}
         </motion.div>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={vp}
-          className="text-center text-mint/60 text-xs font-sans mt-10"
-        >
-          Premier échange offert · Sans engagement · Tarifs adaptés à votre volume d&apos;activité
-        </motion.p>
 
       </div>
     </section>
