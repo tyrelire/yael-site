@@ -8,10 +8,10 @@ export default function Footer() {
             <span className="font-display text-mint text-[1.25rem] font-bold leading-none -ml-[1px]">es</span>
             <span className="ml-2 font-sans text-[9px] text-mint/50 uppercase tracking-[0.2em] font-semibold self-end mb-[3px]">Invoice</span>
           </a>
-          <p className="text-mint/40 text-xs font-sans text-center">
+          <p className="text-mint/65 text-xs font-sans text-center">
             La facturation pensée pour les infirmières et infirmiers libéraux
           </p>
-          <p className="text-mint/30 text-xs font-sans">© 2026 Yes Invoice</p>
+          <p className="text-mint/55 text-xs font-sans">© 2026 Yes Invoice</p>
         </div>
       </div>
     </footer>

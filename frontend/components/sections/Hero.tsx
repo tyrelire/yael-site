@@ -7,10 +7,10 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col bg-mint overflow-hidden">
       {/* Formes déco — fond riche */}
-      <div className="absolute z-0 -top-32 -right-32 w-[640px] h-[640px] rounded-full bg-sage/30 blur-3xl pointer-events-none" />
-      <div className="absolute z-0 -bottom-24 -left-24 w-[480px] h-[480px] rounded-full bg-sage/20 blur-3xl pointer-events-none" />
-      <div className="absolute z-0 top-1/3 left-1/4 w-80 h-80 rounded-full bg-sage/18 blur-2xl pointer-events-none" />
-      <div className="absolute z-0 bottom-1/4 right-1/4 w-56 h-56 rounded-full bg-sage-dark/15 blur-2xl pointer-events-none" />
+      <div className="absolute z-0 -top-32 -right-32 w-[640px] h-[640px] rounded-full bg-sage/15 blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute z-0 -bottom-24 -left-24 w-[480px] h-[480px] rounded-full bg-sage/12 blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute z-0 top-1/3 left-1/4 w-80 h-80 rounded-full bg-sage/10 blur-2xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute z-0 bottom-1/4 right-1/4 w-56 h-56 rounded-full bg-sage-dark/10 blur-2xl pointer-events-none" aria-hidden="true" />
 
       {/* Contenu principal */}
       <div className="relative z-[1] flex-1 flex items-center pb-20">
@@ -25,15 +25,15 @@ export default function Hero() {
           >
             <motion.span
               variants={fadeUp}
-              className="inline-flex items-center gap-3 text-sage font-sans text-xs uppercase tracking-[0.28em] font-semibold mb-6"
+              className="inline-flex items-center gap-3 text-sage-dark font-sans text-xs uppercase tracking-[0.28em] font-semibold mb-6"
             >
-              <span className="w-8 h-px bg-sage"></span>
+              <span className="w-8 h-px bg-sage-dark"></span>
               <span>Facturière indépendante · Micro-entreprise</span>
             </motion.span>
 
             <motion.h1 variants={fadeUp} className="font-display text-forest font-bold leading-tight">
-              <span className="block text-[clamp(2.2rem,4.5vw,4.8rem)]">Vous soignez.</span>
-              <span className="font-script text-sage block mt-2 text-[clamp(1.8rem,3.8vw,4rem)]">
+              <span className="block text-[clamp(3rem,4.5vw,4.8rem)]">Vous soignez.</span>
+              <span className="font-script text-sage-dark block mt-2 text-[clamp(2.4rem,3.8vw,4rem)]">
                 Je m&apos;occupe du reste.
               </span>
             </motion.h1>
@@ -90,8 +90,7 @@ export default function Hero() {
             className="hidden lg:flex lg:col-span-2 flex-col justify-center"
           >
             <div
-              className="rounded-2xl p-8 text-mint relative overflow-hidden"
-              style={{ backgroundColor: "#2D2219" }}
+              className="rounded-2xl p-8 text-mint relative overflow-hidden bg-forest"
             >
               {/* Pattern dots */}
               <div

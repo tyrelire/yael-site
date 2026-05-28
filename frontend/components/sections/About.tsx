@@ -140,7 +140,7 @@ export default function About({ className }: Readonly<{ className?: string }>) {
             viewport={vp}
             className="flex flex-col pt-6 lg:pt-0"
           >
-            <motion.p variants={fadeUp} className="text-sage uppercase tracking-widest text-xs font-sans font-semibold mb-3">
+            <motion.p variants={fadeUp} className="text-sage-dark uppercase tracking-widest text-xs font-sans font-semibold mb-3">
               À propos
             </motion.p>
 

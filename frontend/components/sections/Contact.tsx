@@ -116,7 +116,7 @@ export default function Contact({ className }: Readonly<{ className?: string }>)
 
         {/* Colonne gauche — info */}
         <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={vp} className="flex flex-col">
-          <p className="text-sage-dark uppercase tracking-widest text-xs font-sans font-semibold mb-4">Contact</p>
+          <p className="text-forest/60 uppercase tracking-widest text-xs font-sans font-semibold mb-4">Contact</p>
           <h2 className="font-display text-forest text-3xl sm:text-5xl font-bold leading-tight mb-4">
             Parlons de<br />votre activité
           </h2>

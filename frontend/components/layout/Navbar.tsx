@@ -31,9 +31,9 @@ export default function Navbar() {
 
           {/* Logo */}
           <a href="/" aria-label="Yes Invoice — accueil" className="flex items-center shrink-0 z-10 select-none">
-            <span className="font-script text-sage text-[2rem] leading-none">Y</span>
-            <span className="font-display text-forest text-[1.25rem] font-bold leading-none -ml-[1px]">es</span>
-            <span className="ml-2 font-sans text-[10px] text-forest/60 uppercase tracking-[0.2em] font-semibold self-end mb-[3px]">Invoice</span>
+            <span className="font-script text-sage text-[2rem] leading-none" aria-hidden="true">Y</span>
+            <span className="font-display text-forest text-[1.25rem] font-bold leading-none -ml-[1px]" aria-hidden="true">es</span>
+            <span className="ml-2 font-sans text-[11px] text-forest/70 uppercase tracking-[0.2em] font-semibold self-end mb-[3px]" aria-hidden="true">Invoice</span>
           </a>
 
           {/* Liens desktop */}
@@ -92,9 +92,9 @@ export default function Navbar() {
         {/* En-tête du drawer */}
         <div className="h-[68px] flex items-center justify-between px-6 border-b border-sage/10">
           <a href="/" aria-label="Yes Invoice — accueil" className="flex items-center select-none">
-            <span className="font-script text-sage text-[1.75rem] leading-none">Y</span>
-            <span className="font-display text-forest text-[1.1rem] font-bold leading-none -ml-[1px]">es</span>
-            <span className="ml-1.5 font-sans text-[8px] text-forest/45 uppercase tracking-[0.18em] font-semibold self-end mb-[2px]">Invoice</span>
+            <span className="font-script text-sage text-[1.75rem] leading-none" aria-hidden="true">Y</span>
+            <span className="font-display text-forest text-[1.1rem] font-bold leading-none -ml-[1px]" aria-hidden="true">es</span>
+            <span className="ml-1.5 font-sans text-[11px] text-forest/70 uppercase tracking-[0.18em] font-semibold self-end mb-[2px]" aria-hidden="true">Invoice</span>
           </a>
           <button
             onClick={() => setOpen(false)}
@@ -118,7 +118,7 @@ export default function Navbar() {
               style={{ transitionDelay: open ? `${i * 60}ms` : "0ms" }}
             >
               {label}
-              <span className="text-sage/40 group-hover:text-sage transition-colors text-base">→</span>
+              <span className="text-sage/40 group-hover:text-sage transition-colors text-base" aria-hidden="true">→</span>
             </a>
           ))}
         </nav>
@@ -132,9 +132,6 @@ export default function Navbar() {
           >
             Me contacter →
           </a>
-          <p className="text-forest/30 text-[10px] font-sans uppercase tracking-widest text-center mt-4">
-            Facturière indépendante · Infirmières libérales
-          </p>
         </div>
       </div>
     </>

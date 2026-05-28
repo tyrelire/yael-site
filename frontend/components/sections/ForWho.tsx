@@ -41,7 +41,7 @@ export default function ForWho({ className }: Readonly<{ className?: string }>) 
           viewport={vp}
           className="text-center mb-10 sm:mb-16"
         >
-          <motion.p variants={fadeUp} className="text-sage-dark uppercase tracking-widest text-xs font-sans font-semibold mb-4">
+          <motion.p variants={fadeUp} className="text-forest/60 uppercase tracking-widest text-xs font-sans font-semibold mb-4">
             Simple &amp; efficace
           </motion.p>
           <motion.h2 variants={fadeUp} className="font-display text-forest text-4xl sm:text-5xl font-bold">

@@ -78,21 +78,21 @@ export default function Tarifs({ className }: Readonly<{ className?: string }>) 
               variants={fadeUp}
               className={`rounded-2xl p-5 sm:p-6 flex flex-col transition-all duration-300 ${
                 plan.highlight
-                  ? "backdrop-blur-md bg-sage/75 border border-sage/50 shadow-2xl ring-1 ring-sage/30 sm:scale-[1.02]"
+                  ? "bg-white border border-white/80 shadow-2xl ring-1 ring-sage/20 sm:scale-[1.02]"
                   : "backdrop-blur-sm bg-white/8 border border-white/10 hover:bg-white/12 hover:border-white/18"
               }`}
             >
               {plan.highlight && (
-                <span className="inline-block bg-white/20 text-white text-[10px] font-sans uppercase tracking-widest px-3 py-1 rounded-full mb-3 self-start backdrop-blur-sm">
+                <span className="inline-block bg-sage-dark text-white text-[10px] font-sans uppercase tracking-widest px-3 py-1 rounded-full mb-3 self-start">
                   Populaire
                 </span>
               )}
 
               <div className="mb-4">
-                <p className="font-display font-bold text-xl mb-0.5 text-white">
+                <p className={`font-display font-bold text-xl mb-0.5 ${plan.highlight ? "text-forest" : "text-white"}`}>
                   {plan.name}
                 </p>
-                <p className="text-xs font-sans text-white/60">
+                <p className={`text-xs font-sans ${plan.highlight ? "text-forest/60" : "text-white/60"}`}>
                   {plan.desc}
                 </p>
               </div>
@@ -100,8 +100,8 @@ export default function Tarifs({ className }: Readonly<{ className?: string }>) 
               <ul className="space-y-2 flex-1 mb-5">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm font-sans">
-                    <span className={`mt-0.5 shrink-0 font-semibold ${plan.highlight ? "text-white" : "text-sage"}`}>✓</span>
-                    <span className="text-white/90">{f}</span>
+                    <span className={`mt-0.5 shrink-0 font-semibold ${plan.highlight ? "text-sage-dark" : "text-sage"}`}>✓</span>
+                    <span className={plan.highlight ? "text-forest/85" : "text-white/90"}>{f}</span>
                   </li>
                 ))}
               </ul>
@@ -110,7 +110,7 @@ export default function Tarifs({ className }: Readonly<{ className?: string }>) 
                 href="/contact"
                 className={`block w-full text-center font-sans font-semibold py-3 text-sm rounded-xl transition-all duration-200 ${
                   plan.highlight
-                    ? "bg-white text-forest hover:bg-mint"
+                    ? "bg-forest text-mint hover:bg-sage-dark"
                     : "bg-white/10 backdrop-blur-sm border border-white/15 text-white hover:bg-white/20"
                 }`}
               >
