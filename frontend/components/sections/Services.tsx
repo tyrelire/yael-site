@@ -115,27 +115,20 @@ const services = [
 ];
 
 const sectionBgs = ["bg-mint", "bg-white", "bg-sage-light/40", "bg-white", "bg-mint", "bg-sage-light/40"];
-const cardBgs   = ["bg-forest", "bg-forest",    "bg-forest", "bg-forest",    "bg-forest", "bg-forest"];
 
 export default function Services({ className }: Readonly<{ className?: string }>) {
   return (
     <div className={className}>
 
       {/* ── En-tête ─────────────────────────────────────── */}
-      <section className="bg-forest py-16 sm:py-24 relative overflow-hidden">
+      <section className="bg-forest py-16 pb-28 sm:py-24 relative overflow-hidden">
         <div className="absolute z-0 -top-40 -right-40 w-[560px] h-[560px] rounded-full bg-sage/20 blur-3xl pointer-events-none" />
         <div className="absolute z-0 -bottom-24 -left-24 w-[360px] h-[360px] rounded-full bg-sage-dark/25 blur-3xl pointer-events-none" />
-        <div
-          className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }}
-        />
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={vp}
-          className="relative z-[1] max-w-4xl mx-auto px-5 sm:px-8 text-center"
-        >
+        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+          style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={vp}
+          className="relative z-[1] max-w-4xl mx-auto px-5 sm:px-8 text-center">
           <motion.p variants={fadeUp} className="text-sage font-sans text-xs uppercase tracking-[0.28em] font-semibold mb-5">
             Mes prestations
           </motion.p>
@@ -147,7 +140,7 @@ export default function Services({ className }: Readonly<{ className?: string }>
             Vous vous concentrez sur vos patients — je m&apos;occupe de tout le reste.
           </motion.p>
 
-          <motion.div variants={stagger} className="grid grid-cols-3 gap-6 mt-12 max-w-lg mx-auto">
+          <motion.div variants={stagger} className="grid grid-cols-3 gap-6 mt-20 sm:mt-12 max-w-lg mx-auto">
             {[
               { value: "J+0",   label: "FSE envoyées le jour même de la visite" },
               { value: "< 48h", label: "Rejets corrigés et renvoyés sous 48 heures" },
@@ -164,8 +157,8 @@ export default function Services({ className }: Readonly<{ className?: string }>
 
       </section>
 
-      {/* Flèche scroll — dans la zone claire en dessous */}
-      <div className="relative z-10 flex justify-center h-0">
+      {/* Flèche scroll — desktop uniquement, dans la zone claire en dessous */}
+      <div className="relative z-10 hidden sm:flex justify-center h-0">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -186,9 +179,8 @@ export default function Services({ className }: Readonly<{ className?: string }>
 
       {/* ── Services alternés ────────────────────────────── */}
       {services.map((service, i) => {
-        const isEven   = i % 2 === 1;
+        const isEven  = i % 2 === 1;
         const sectionBg = sectionBgs[i];
-        const cardBg    = cardBgs[i];
         const textAnim  = isEven ? fadeRight : fadeLeft;
         const cardAnim  = isEven ? fadeLeft  : fadeRight;
 
@@ -198,17 +190,10 @@ export default function Services({ className }: Readonly<{ className?: string }>
               <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center ${isEven ? "lg:[&>*:first-child]:order-2" : ""}`}>
 
                 {/* Carte visuelle */}
-                <motion.div
-                  variants={cardAnim}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={vp}
-                >
-                  <div className={`${cardBg} rounded-3xl p-10 sm:p-12 flex flex-col gap-6 relative overflow-hidden min-h-[320px] sm:min-h-[380px] justify-between`}>
-                    <div
-                      className="absolute inset-0 opacity-[0.04]"
-                      style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "22px 22px" }}
-                    />
+                <motion.div variants={cardAnim} initial="hidden" whileInView="visible" viewport={vp}>
+                  <div className="bg-forest rounded-3xl p-10 sm:p-12 flex flex-col gap-6 relative overflow-hidden min-h-[320px] sm:min-h-[380px] justify-between">
+                    <div className="absolute inset-0 opacity-[0.04]"
+                      style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
                     <div className="relative z-10">
                       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${isEven ? "bg-sage/25 text-sage" : "bg-white/10 text-sage"}`}>
                         {service.icon}
@@ -227,13 +212,7 @@ export default function Services({ className }: Readonly<{ className?: string }>
                 </motion.div>
 
                 {/* Texte + exemples */}
-                <motion.div
-                  variants={textAnim}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={vp}
-                  className="flex flex-col"
-                >
+                <motion.div variants={textAnim} initial="hidden" whileInView="visible" viewport={vp} className="flex flex-col">
                   <p className="text-sage-dark font-sans text-xs uppercase tracking-[0.22em] font-semibold mb-4">
                     Prestation {service.num}
                   </p>
@@ -243,7 +222,6 @@ export default function Services({ className }: Readonly<{ className?: string }>
                   <p className="text-forest/70 font-sans text-base leading-relaxed mb-7">
                     {service.desc}
                   </p>
-
                   <ul className="flex flex-col gap-3">
                     {service.examples.map((ex) => (
                       <li key={ex} className="flex items-start gap-3">
@@ -267,26 +245,17 @@ export default function Services({ className }: Readonly<{ className?: string }>
       {/* ── CTA final ───────────────────────────────────── */}
       <section className="bg-forest py-16 sm:py-20 relative overflow-hidden">
         <div className="absolute z-0 inset-0 opacity-[0.03] pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }}
-        />
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={vp}
-          className="relative z-[1] max-w-2xl mx-auto px-5 sm:px-8 text-center"
-        >
+          style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={vp}
+          className="relative z-[1] max-w-2xl mx-auto px-5 sm:px-8 text-center">
           <motion.p variants={fadeUp} className="font-script text-sage text-4xl sm:text-5xl mb-4">
             Prêt·e à déléguer ?
           </motion.p>
           <motion.p variants={fadeUp} className="text-mint/60 font-sans text-base leading-relaxed mb-8 max-w-md mx-auto">
             Premier échange offert, sans engagement. Je vous explique comment on peut travailler ensemble simplement.
           </motion.p>
-          <motion.a
-            variants={fadeUp}
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-sage text-forest font-sans font-bold px-8 py-4 text-base rounded-xl hover:bg-sage-light transition-all duration-200"
-          >
+          <motion.a variants={fadeUp} href="/contact"
+            className="inline-flex items-center gap-2 bg-sage text-forest font-sans font-bold px-8 py-4 text-base rounded-xl hover:bg-sage-light transition-all duration-200">
             Me contacter →
           </motion.a>
         </motion.div>
