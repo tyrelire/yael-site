@@ -11,10 +11,9 @@ const nameChars = /[^a-zA-ZÀ-ÖØ-öø-ÿ'\-\s]/g;
 function titleCase(v: string) {
   return v.replace(/(^|[\s\-'])(\S)/g, (_, sep, c: string) => sep + c.toUpperCase());
 }
-const phoneChars = /[^0-9 +\-()]/g;
 
 const EMAIL_RE = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-const PHONE_RE = /^(\+33|0033)?[1-9][0-9]{8}$/;
+
 
 function validateField(field: string, value: string): string {
   switch (field) {
@@ -32,7 +31,7 @@ function validateField(field: string, value: string): string {
       return "";
     case "phone":
       if (!value) return "";
-      if (!PHONE_RE.test(value.replace(/[\s\-()]/g, ""))) return "Format invalide (ex: 06 12 34 56 78)";
+      if (!/^0[1-9]\d{8}$/.test(value)) return "Numéro invalide (ex: 0612345678)";
       return "";
     case "message":
       if (!value.trim()) return "Message requis";
@@ -251,11 +250,11 @@ export default function Contact({ className }: Readonly<{ className?: string }>)
                   <span className="text-forest/35 normal-case tracking-normal font-normal">(optionnel)</span>
                 </label>
                 <input
-                  id="contact-phone" type="tel" maxLength={16}
+                  id="contact-phone" type="tel" maxLength={10}
                   value={form.phone}
-                  onChange={set("phone", (v) => v.replace(phoneChars, "").slice(0, 16))}
+                  onChange={set("phone", (v) => v.replace(/\D/g, "").slice(0, 10))}
                   onBlur={touch("phone")}
-                  placeholder="06 00 00 00 00"
+                  placeholder="0612345678"
                   autoComplete="tel"
                   className={inputCls(!!err("phone"))}
                 />
