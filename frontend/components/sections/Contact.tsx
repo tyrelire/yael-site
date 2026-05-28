@@ -4,57 +4,120 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { fadeLeft, fadeRight, vp } from "@/lib/animations";
 
-const inputClass =
-  "w-full bg-sage-light/50 border border-sage/20 rounded-xl px-3.5 py-2.5 text-sm font-sans text-forest placeholder:text-forest/30 focus:outline-none focus:border-sage focus:bg-white transition-all duration-200";
+const labelClass = "text-forest/70 font-sans text-xs uppercase tracking-wider font-semibold";
+const MSG_MAX = 1500;
 
-const labelClass =
-  "text-forest/70 font-sans text-xs uppercase tracking-wider font-semibold";
+const nameChars = /[^a-zA-ZÀ-ÖØ-öø-ÿ'\-\s]/g;
+function titleCase(v: string) {
+  return v.replace(/(^|[\s\-'])(\S)/g, (_, sep, c: string) => sep + c.toUpperCase());
+}
+const phoneChars = /[^0-9 +\-()]/g;
+
+const EMAIL_RE = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+const PHONE_RE = /^(\+33|0033)?[1-9][0-9]{8}$/;
+
+function validateField(field: string, value: string): string {
+  switch (field) {
+    case "prenom":
+      if (!value.trim()) return "Prénom requis";
+      if (value.trim().length < 2) return "Minimum 2 caractères";
+      return "";
+    case "nom":
+      if (!value.trim()) return "Nom requis";
+      if (value.trim().length < 2) return "Minimum 2 caractères";
+      return "";
+    case "email":
+      if (!value) return "Email requis";
+      if (!EMAIL_RE.test(value)) return "Adresse email invalide";
+      return "";
+    case "phone":
+      if (!value) return "";
+      if (!PHONE_RE.test(value.replace(/[\s\-()]/g, ""))) return "Format invalide (ex: 06 12 34 56 78)";
+      return "";
+    case "message":
+      if (!value.trim()) return "Message requis";
+      if (value.trim().length < 10) return "Message trop court (10 caractères min.)";
+      return "";
+    default:
+      return "";
+  }
+}
+
+function inputCls(error: boolean) {
+  return `w-full border rounded-xl px-3.5 py-2.5 text-sm font-sans text-forest placeholder:text-forest/30 focus:outline-none transition-all duration-200 ${
+    error
+      ? "border-red-400 bg-red-50/40 focus:border-red-400 focus:bg-red-50/60"
+      : "bg-sage-light/50 border-sage/20 focus:border-sage focus:bg-white"
+  }`;
+}
 
 export default function Contact({ className }: Readonly<{ className?: string }>) {
-  const [form, setForm] = useState({
-    prenom: "",
-    nom: "",
-    email: "",
-    phone: "",
-    message: "",
-    _hp: "",
-  });
+  const [form, setForm] = useState({ prenom: "", nom: "", email: "", phone: "", message: "", _hp: "" });
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [submitMsg, setSubmitMsg] = useState<"" | "validation" | "server">("");
 
-  function set(field: string) {
-    return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      setForm((f) => ({ ...f, [field]: e.target.value }));
+  function set(field: string, transform?: (v: string) => string) {
+    return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const val = transform ? transform(e.target.value) : e.target.value;
+      setForm((f) => ({ ...f, [field]: val }));
+      if (touched[field]) {
+        const fieldErr = validateField(field, val);
+        setErrors((err) => ({ ...err, [field]: fieldErr }));
+        if (!fieldErr) setSubmitMsg((m) => m === "validation" ? "" : m);
+      }
+    };
+  }
+
+  function touch(field: string) {
+    return () => {
+      setTouched((t) => ({ ...t, [field]: true }));
+      setErrors((err) => ({ ...err, [field]: validateField(field, form[field as keyof typeof form]) }));
+    };
   }
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
+    const allFields = ["prenom", "nom", "email", "message"];
+    const newErrors: Record<string, string> = {};
+    const newTouched: Record<string, boolean> = {};
+    for (const f of allFields) {
+      newTouched[f] = true;
+      newErrors[f] = validateField(f, form[f as keyof typeof form]);
+    }
+    if (form.phone) newErrors.phone = validateField("phone", form.phone);
+    setTouched((t) => ({ ...t, ...newTouched }));
+    setErrors(newErrors);
+    if (Object.values(newErrors).some(Boolean)) {
+      setSubmitMsg("validation");
+      return;
+    }
+
+    setSubmitMsg("");
     setStatus("loading");
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
-    setStatus(res.ok ? "success" : "error");
+    if (res.ok) {
+      setStatus("success");
+    } else {
+      setStatus("error");
+      setSubmitMsg("server");
+    }
   }
+
+  const err = (field: string) => touched[field] ? errors[field] ?? "" : "";
 
   return (
     <section id="contact" className={`relative overflow-hidden ${className ?? "bg-sage-light py-14 sm:py-24"}`}>
-      <div className="absolute z-0 -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-white/50 blur-3xl pointer-events-none" />
-      <div className="absolute z-0 -bottom-32 -left-32 w-[480px] h-[480px] rounded-full bg-sage/15 blur-3xl pointer-events-none" />
-
       <div className="relative z-[1] w-full max-w-6xl mx-auto px-5 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start lg:items-center">
 
         {/* Colonne gauche — info */}
-        <motion.div
-          variants={fadeLeft}
-          initial="hidden"
-          whileInView="visible"
-          viewport={vp}
-          className="flex flex-col"
-        >
-          <p className="text-sage-dark uppercase tracking-widest text-xs font-sans font-semibold mb-4">
-            Contact
-          </p>
+        <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={vp} className="flex flex-col">
+          <p className="text-sage-dark uppercase tracking-widest text-xs font-sans font-semibold mb-4">Contact</p>
           <h2 className="font-display text-forest text-3xl sm:text-5xl font-bold leading-tight mb-4">
             Parlons de<br />votre activité
           </h2>
@@ -106,12 +169,7 @@ export default function Contact({ className }: Readonly<{ className?: string }>)
         </motion.div>
 
         {/* Colonne droite — formulaire */}
-        <motion.div
-          variants={fadeRight}
-          initial="hidden"
-          whileInView="visible"
-          viewport={vp}
-        >
+        <motion.div variants={fadeRight} initial="hidden" whileInView="visible" viewport={vp}>
           {status === "success" ? (
             <div className="bg-white rounded-2xl px-6 py-14 sm:px-10 sm:py-16 flex flex-col items-center text-center shadow-lg gap-4">
               <div className="w-14 h-14 rounded-full bg-sage/15 flex items-center justify-center mb-1">
@@ -124,114 +182,123 @@ export default function Contact({ className }: Readonly<{ className?: string }>)
                 Votre message a bien été envoyé. Je vous réponds dans les plus brefs délais.
               </p>
               <button
-                onClick={() => { setStatus("idle"); setForm({ prenom: "", nom: "", email: "", phone: "", message: "", _hp: "" }); }}
+                onClick={() => { setStatus("idle"); setForm({ prenom: "", nom: "", email: "", phone: "", message: "", _hp: "" }); setTouched({}); setErrors({}); }}
                 className="mt-2 text-xs font-sans font-semibold text-sage-dark underline underline-offset-2 hover:text-forest transition-colors"
               >
                 Envoyer un autre message
               </button>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white rounded-2xl p-5 sm:p-7 shadow-lg flex flex-col gap-3.5"
-            >
-              {/* Honeypot — invisible pour les humains, piège pour les bots */}
-              <input
-                type="text"
-                name="website"
-                value={form._hp}
-                onChange={set("_hp")}
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-                className="absolute opacity-0 w-0 h-0 overflow-hidden pointer-events-none"
-              />
+            <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl p-5 sm:p-7 shadow-lg flex flex-col gap-3.5">
+              {/* Honeypot */}
+              <input type="text" name="website" value={form._hp} onChange={set("_hp")} tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute opacity-0 w-0 h-0 overflow-hidden pointer-events-none" />
 
-              {/* Prénom + Nom — empilés sur mobile, côte à côte sur sm+ */}
+              {/* Prénom + Nom */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5">
                   <label htmlFor="contact-prenom" className={labelClass}>
                     Prénom <span className="text-red-500">*</span>
                   </label>
                   <input
-                    id="contact-prenom"
-                    type="text"
-                    required
+                    id="contact-prenom" type="text" required maxLength={50}
                     value={form.prenom}
-                    onChange={set("prenom")}
+                    onChange={set("prenom", (v) => titleCase(v.replace(nameChars, "").slice(0, 50)))}
+                    onBlur={touch("prenom")}
                     placeholder="Votre prénom"
                     autoComplete="given-name"
-                    className={inputClass}
+                    className={inputCls(!!err("prenom"))}
                   />
+                  {err("prenom") && <p className="text-red-500 text-xs font-sans">{err("prenom")}</p>}
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5">
                   <label htmlFor="contact-nom" className={labelClass}>
                     Nom <span className="text-red-500">*</span>
                   </label>
                   <input
-                    id="contact-nom"
-                    type="text"
-                    required
+                    id="contact-nom" type="text" required maxLength={50}
                     value={form.nom}
-                    onChange={set("nom")}
-                    placeholder="Votre nom"
+                    onChange={set("nom", (v) => v.replace(nameChars, "").slice(0, 50).toUpperCase())}
+                    onBlur={touch("nom")}
+                    placeholder="VOTRE NOM"
                     autoComplete="family-name"
-                    className={inputClass}
+                    className={inputCls(!!err("nom"))}
                   />
+                  {err("nom") && <p className="text-red-500 text-xs font-sans">{err("nom")}</p>}
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2">
+              {/* Email */}
+              <div className="flex flex-col gap-1.5">
                 <label htmlFor="contact-email" className={labelClass}>
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
-                  id="contact-email"
-                  type="email"
-                  required
+                  id="contact-email" type="email" required maxLength={254}
                   value={form.email}
                   onChange={set("email")}
+                  onBlur={touch("email")}
                   placeholder="votre@email.fr"
                   autoComplete="email"
-                  className={inputClass}
+                  className={inputCls(!!err("email"))}
                 />
+                {err("email") && <p className="text-red-500 text-xs font-sans">{err("email")}</p>}
               </div>
 
-              <div className="flex flex-col gap-2">
+              {/* Téléphone */}
+              <div className="flex flex-col gap-1.5">
                 <label htmlFor="contact-phone" className={labelClass}>
                   Téléphone{" "}
                   <span className="text-forest/35 normal-case tracking-normal font-normal">(optionnel)</span>
                 </label>
                 <input
-                  id="contact-phone"
-                  type="tel"
+                  id="contact-phone" type="tel" maxLength={16}
                   value={form.phone}
-                  onChange={set("phone")}
+                  onChange={set("phone", (v) => v.replace(phoneChars, "").slice(0, 16))}
+                  onBlur={touch("phone")}
                   placeholder="06 00 00 00 00"
                   autoComplete="tel"
-                  className={inputClass}
+                  className={inputCls(!!err("phone"))}
                 />
+                {err("phone") && <p className="text-red-500 text-xs font-sans">{err("phone")}</p>}
               </div>
 
-              <div className="flex flex-col gap-2">
-                <label htmlFor="contact-message" className={labelClass}>
-                  Message <span className="text-red-500">*</span>
-                </label>
+              {/* Message */}
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center justify-between">
+                  <label htmlFor="contact-message" className={labelClass}>
+                    Message <span className="text-red-500">*</span>
+                  </label>
+                  <span className={`font-sans text-xs tabular-nums ${form.message.length >= MSG_MAX ? "text-red-400" : "text-forest/30"}`}>
+                    {form.message.length}/{MSG_MAX}
+                  </span>
+                </div>
                 <textarea
-                  id="contact-message"
-                  required
-                  rows={4}
+                  id="contact-message" required rows={4} maxLength={MSG_MAX}
                   value={form.message}
-                  onChange={set("message")}
+                  onChange={set("message", (v) => v.slice(0, MSG_MAX))}
+                  onBlur={touch("message")}
                   placeholder="Décrivez votre situation en quelques mots..."
-                  className={`${inputClass} resize-none`}
+                  className={`${inputCls(!!err("message"))} resize-none`}
                 />
+                {err("message") && <p className="text-red-500 text-xs font-sans">{err("message")}</p>}
               </div>
 
-              {status === "error" && (
-                <p className="text-red-600 text-sm font-sans">
-                  Une erreur est survenue. Réessayez ou écrivez-moi directement.
-                </p>
+              {submitMsg === "validation" && (
+                <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-red-500 shrink-0 mt-0.5">
+                    <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                  <p className="text-red-600 text-sm font-sans leading-snug">Veuillez corriger les erreurs avant d&apos;envoyer le formulaire.</p>
+                </div>
+              )}
+
+              {submitMsg === "server" && (
+                <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-red-500 shrink-0 mt-0.5">
+                    <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                  <p className="text-red-600 text-sm font-sans leading-snug">Une erreur est survenue. Réessayez ou écrivez-moi directement à contact@yesinvoice.fr</p>
+                </div>
               )}
 
               <button
