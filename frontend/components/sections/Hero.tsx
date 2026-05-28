@@ -7,13 +7,13 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col bg-mint overflow-hidden">
       {/* Formes déco — fond riche */}
-      <div className="absolute z-0 -top-32 -right-32 w-[640px] h-[640px] rounded-full bg-sage/15 blur-3xl pointer-events-none" />
-      <div className="absolute z-0 -bottom-24 -left-24 w-[480px] h-[480px] rounded-full bg-sage-light blur-3xl pointer-events-none" />
-      <div className="absolute z-0 top-1/3 left-1/4 w-80 h-80 rounded-full bg-sage/8 blur-2xl pointer-events-none" />
-      <div className="absolute z-0 bottom-1/4 right-1/4 w-56 h-56 rounded-full bg-sage-dark/6 blur-2xl pointer-events-none" />
+      <div className="absolute z-0 -top-32 -right-32 w-[640px] h-[640px] rounded-full bg-sage/30 blur-3xl pointer-events-none" />
+      <div className="absolute z-0 -bottom-24 -left-24 w-[480px] h-[480px] rounded-full bg-sage/20 blur-3xl pointer-events-none" />
+      <div className="absolute z-0 top-1/3 left-1/4 w-80 h-80 rounded-full bg-sage/18 blur-2xl pointer-events-none" />
+      <div className="absolute z-0 bottom-1/4 right-1/4 w-56 h-56 rounded-full bg-sage-dark/15 blur-2xl pointer-events-none" />
 
       {/* Contenu principal */}
-      <div className="relative z-[1] flex-1 flex items-center">
+      <div className="relative z-[1] flex-1 flex items-center pb-20">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 py-6 sm:py-12">
 
           {/* Colonne gauche — texte (3/5) */}
