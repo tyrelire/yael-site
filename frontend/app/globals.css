@@ -8,12 +8,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-forest: #1C1C1C;
-  --color-sage: #9CA686;
-  --color-sage-dark: #4A5E38;
-  --color-sage-light: #C6B4A0;
+  --color-forest: #1A2B18;
+  --color-sage: #A5B89A;
+  --color-sage-dark: #4B6840;
+  --color-sage-light: #D5E0CE;
   --color-mint: #FAF8F5;
-  --color-mint-dark: #F0EAE2;
+  --color-mint-dark: #EBF0E6;
+  --color-terra: #C4603C;
+  --color-terra-dark: #A34B2C;
   --font-display: var(--font-playfair);
   --font-script: var(--font-dancing);
   --font-sans: var(--font-inter);

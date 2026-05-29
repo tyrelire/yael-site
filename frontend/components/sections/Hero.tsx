@@ -54,7 +54,7 @@ export default function Hero() {
               <motion.a
                 variants={fadeUp}
                 href="/contact"
-                className="bg-forest text-mint font-sans font-semibold px-7 py-3.5 text-sm text-center hover:bg-sage transition-all duration-200 w-full sm:w-auto rounded-lg"
+                className="bg-terra text-mint font-sans font-semibold px-7 py-3.5 text-sm text-center hover:bg-terra-dark transition-all duration-200 w-full sm:w-auto rounded-lg"
               >
                 Me contacter →
               </motion.a>

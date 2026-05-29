@@ -54,7 +54,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href="/contact"
-              className="hidden sm:inline-flex shrink-0 text-sm font-sans font-semibold bg-forest text-mint px-5 py-2 rounded-xl hover:bg-sage-dark transition-all duration-200"
+              className="hidden sm:inline-flex shrink-0 text-sm font-sans font-semibold bg-terra text-mint px-5 py-2 rounded-xl hover:bg-terra-dark transition-all duration-200"
             >
               Me contacter →
             </a>
@@ -128,7 +128,7 @@ export default function Navbar() {
           <a
             href="/contact"
             onClick={() => setOpen(false)}
-            className="block w-full text-center bg-forest text-mint font-sans font-semibold py-3.5 text-sm rounded-xl hover:bg-sage transition-all duration-200"
+            className="block w-full text-center bg-terra text-mint font-sans font-semibold py-3.5 text-sm rounded-xl hover:bg-terra-dark transition-all duration-200"
           >
             Me contacter →
           </a>

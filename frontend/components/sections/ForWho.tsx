@@ -28,7 +28,7 @@ const steps = [
 
 export default function ForWho({ className }: Readonly<{ className?: string }>) {
   return (
-    <section className={`relative overflow-hidden ${className ?? "bg-sage-light py-12 sm:py-20 lg:py-28"}`}>
+    <section className={`relative overflow-hidden ${className ?? "bg-sage-light py-10 sm:py-14 lg:py-20"}`}>
       <div className="absolute z-0 -top-24 -left-24 w-[500px] h-[500px] rounded-full bg-white/60 blur-3xl pointer-events-none" />
       <div className="absolute z-0 -bottom-24 -right-24 w-[400px] h-[400px] rounded-full bg-sage/20 blur-3xl pointer-events-none" />
       <div className="absolute z-0 top-1/3 left-1/2 w-64 h-64 rounded-full bg-white/40 blur-2xl pointer-events-none" />
@@ -86,7 +86,7 @@ export default function ForWho({ className }: Readonly<{ className?: string }>) 
         >
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 bg-forest text-mint font-sans font-semibold px-8 py-4 text-sm rounded-xl hover:bg-sage transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-terra text-mint font-sans font-semibold px-8 py-4 text-sm rounded-xl hover:bg-terra-dark transition-all duration-200"
           >
             Commencer par un échange gratuit →
           </a>

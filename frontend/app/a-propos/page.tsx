@@ -26,8 +26,8 @@ export const metadata: Metadata = {
 export default function AProposPage() {
   return (
     <>
-      <About className="bg-white min-h-[calc(100vh-68px)] flex flex-col justify-center py-8 sm:py-10" />
-      <ForWho className="bg-sage-light min-h-[calc(100vh-68px)] flex flex-col justify-center py-8 sm:py-10" />
+      <About />
+      <ForWho />
     </>
   );
 }
